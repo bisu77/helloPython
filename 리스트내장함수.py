@@ -1,5 +1,5 @@
 # 리스트와 내장함수(1)
-import random
+
 import random as r
 
 a=[1,2,3,4,5]
