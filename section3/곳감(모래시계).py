@@ -25,8 +25,46 @@ sys.stdin = open("곳감(모래시계).txt","rt")
 N = int(input())
 lst = [list(map(int,input().split())) for _ in range(N)]
 M = int(input())
-lst2 = [list(map(int, input().split())) for _ in range(M)]
 
-
-# for i in range(N):
+#경준
+# for i in range(M):
+#     n, d, c = map(int,input().split())
+#     #default:좌측이동
+#     lst1 = lst[n-1][:c]  #빈자리 찾아가는 lst
+#     lst2 = lst[n-1][c:N] #이동대상 lst
+#     if d == 1:#우측이동
+#         lst1 = lst[n-1][:N-c]
+#         lst2 = lst[n-1][N-c:N]
+#     lstIdx = 0
+#
 #     for j in range(N):
+#         if len(lst2) > j:
+#             lst[n-1][j] = lst2[j]
+#         else:
+#             lst[n-1][j] = lst1[lstIdx]
+#             lstIdx += 1
+
+#강의
+for i in range(M):
+    n, d, c = map(int,input().split())
+    if d == 0:
+        for _ in range(c):
+            lst[n-1].append(lst[n-1].pop(0))
+    else:
+        for _ in range(c):
+            lst[n-1].insert(0, lst[n-1].pop())
+
+sum = 0
+s, e = 0, N-1
+
+for i in range(N):
+    for j in range(s,e+1):
+        sum += lst[i][j]
+    if i < N//2:
+        s += 1
+        e -= 1
+    else:
+        s -= 1
+        e += 1
+
+print(sum)
