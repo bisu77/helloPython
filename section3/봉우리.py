@@ -21,23 +21,39 @@ N = int(input())
 lst = [list(map(int,input().split())) for _ in range(N)]
 cnt = 0
 
-for i in range(N):
-    for j in range(N):
-        val = lst[i][j]
-        dr = 0 #아래 row 값
-        ur = 0 #위 row 값
-        lc = 0 #왼쪽 col 값
-        rc = 0 #오른쪽 col 값
-        if i-1 >= 0:
-            dr = lst[i-1][j]
-        if i+1 < N:
-            ur = lst[i+1][j]
-        if j-1 >= 0:
-            lc = lst[i][j-1]
-        if j+1 < N:
-            rc = lst[i][j+1]
+# 경준
+# for i in range(N):
+#     for j in range(N):
+#         val = lst[i][j]
+#         dr = 0 #아래 row 값
+#         ur = 0 #위 row 값
+#         lc = 0 #왼쪽 col 값
+#         rc = 0 #오른쪽 col 값
+#         if i-1 >= 0:
+#             dr = lst[i-1][j]
+#         if i+1 < N:
+#             ur = lst[i+1][j]
+#         if j-1 >= 0:
+#             lc = lst[i][j-1]
+#         if j+1 < N:
+#             rc = lst[i][j+1]
+#
+#         if val > dr and val > ur and val > lc and val > rc:
+#             cnt += 1
 
-        if val > dr and val > ur and val > lc and val > rc:
+# 강의
+dx = [-1,0,1,0]
+dy = [0,1,0,-1]
+lst.append([0]*N)
+lst.insert(0,[0]*N)
+
+for val in lst:
+    val.append(0)
+    val.insert(0, 0)
+
+for i in range(N+1):
+    for j in range(N+1):
+        if(all(lst[i][j]>lst[i+dx[k]][j+dy[k]] for k in range(4))):
             cnt += 1
 
 print(cnt)
