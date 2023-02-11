@@ -18,34 +18,54 @@ import sys
 sys.stdin = open("스도쿠검사.txt","rt")
 
 lst = [list(map(int,input().split())) for _ in range(9)]
-isOk = True
+def sdkCheck():# 내방식
+    rec1, rec2, rec3 = None, None, None
+    for i in range(9):
+        row = set()
+        col = set()
+        if i % 3 == 0:
+            rec1 = set()
+            rec2 = set()
+            rec3 = set()
+        for j in range(9):
+            row.add(lst[i][j])
+            col.add(lst[j][i])
+            if j <= 2:
+                rec1.add(lst[i][j])
+            elif j >= 3 and j <= 5:
+                rec2.add(lst[i][j])
+            else:
+                rec3.add(lst[i][j])
+        if len(row) < 9 or len(col) < 9:
+            return False
+        if i % 3 == 2:
+            if len(rec1) < 9 or len(rec2) < 9 or len(rec3) < 9:
+                return False
 
-rec1, rec2, rec3 = None, None, None
-for i in range(9):
-    row = set()
-    col = set()
-    if i % 3 == 0:
-        rec1 = set()
-        rec2 = set()
-        rec3 = set()
-    for j in range(9):
-        row.add(lst[i][j])
-        col.add(lst[j][i])
-        if j <= 2:
-            rec1.add(lst[i][j])
-        elif j >= 3 and j <= 5:
-            rec2.add(lst[i][j])
-        else:
-            rec3.add(lst[i][j])
-    if len(row) < 9 or len(col) < 9:
-        isOk = False
-        break
-    if i % 3 == 2:
-        if len(rec1) < 9 or len(rec2) < 9 or len(rec3) < 9:
-            isOk = False
-            break
+    return True
 
-if isOk:
+def sdkCheck2(): #강의방식
+    for i in range(9):
+        chk1 = [0]*10
+        chk2 = [0]*10
+        for j in range(9):
+            chk1[lst[i][j]] = 1
+            chk2[lst[j][i]] = 1
+        if sum(chk1) < 9 or sum(chk2) < 9:
+            return False
+
+    for i in range(3):
+        for j in range(3):
+            chk3 = [0]*10
+            for k in range(3):
+                for s in range(3):
+                    chk3[lst[i*3+k][j*3+s]] = 1
+            if sum(chk3) < 9:
+                return False
+
+    return True
+
+if sdkCheck2():
     print("YES")
 else:
     print("NO")
