@@ -18,41 +18,34 @@ import sys
 sys.stdin = open("스도쿠검사.txt","rt")
 
 lst = [list(map(int,input().split())) for _ in range(9)]
+isOk = True
 
-def rowColCheck():
-    for i in range(9):
-        row = set()
-        col = set()
-        for j in range(9):
-            row.add(lst[i][j])
-            col.add(lst[j][i])
-        if len(row) < 9 or len(col) < 9:
-            return False
+rec1, rec2, rec3 = None, None, None
+for i in range(9):
+    row = set()
+    col = set()
+    if i % 3 == 0:
+        rec1 = set()
+        rec2 = set()
+        rec3 = set()
+    for j in range(9):
+        row.add(lst[i][j])
+        col.add(lst[j][i])
+        if j <= 2:
+            rec1.add(lst[i][j])
+        elif j >= 3 and j <= 5:
+            rec2.add(lst[i][j])
+        else:
+            rec3.add(lst[i][j])
+    if len(row) < 9 or len(col) < 9:
+        isOk = False
+        break
+    if i % 3 == 2:
+        if len(rec1) < 9 or len(rec2) < 9 or len(rec3) < 9:
+            isOk = False
+            break
 
-    return True
-
-def rectangleCheck():
-    rec1, rec2, rec3 = None, None, None
-    for i in range(9):
-        if i % 3 == 0:
-            rec1 = set()
-            rec2 = set()
-            rec3 = set()
-        for j in range(9):
-            if j <= 2:
-                rec1.add(lst[i][j])
-            elif j >= 3 and j <= 5:
-                rec2.add(lst[i][j])
-            else:
-                rec3.add(lst[i][j])
-        if i % 3 == 2:
-            if len(rec1) < 9 or len(rec2) < 9 or len(rec3) < 9:
-                return False
-
-    return True
-
-
-if rowColCheck() and rectangleCheck():
+if isOk:
     print("YES")
 else:
     print("NO")
