@@ -21,7 +21,7 @@ lst.sort()
 
 sIdx = 0
 eIdx = N-1
-while True:
+while sIdx <= eIdx:
     cIdx = (sIdx + eIdx) // 2
     if lst[cIdx] == M:
         print(cIdx+1)
@@ -29,4 +29,4 @@ while True:
     if lst[cIdx] < M:
         sIdx = cIdx + 1
     else:
-        eIdx = cIdx
+        eIdx = cIdx - 1
