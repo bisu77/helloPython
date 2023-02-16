@@ -19,21 +19,50 @@
 import sys
 sys.stdin = open("랜선자르기(결정알고리즘).txt","rt")
 
+# K, N = map(int,input().split())
+# lst = list()
+# sum = 0
+# for i in range(K):
+#     lst.append(int(input()))
+#     sum += lst[i]
+#
+# bestCase = sum // N
+#
+# while True:
+#     cnt = 0
+#     bestCase -= 1
+#     for val in lst:
+#         cnt += val // bestCase
+#     if cnt == N:
+#         break
+#
+# print(bestCase)
+
+
+def Count(len):
+    cnt = 0
+    for val in lst:
+        cnt += (val//len)
+    return cnt
+
 K, N = map(int,input().split())
 lst = list()
-sum = 0
+rt = 0
+lt = 1
+res = 0
+
 for i in range(K):
     lst.append(int(input()))
-    sum += lst[i]
+    if rt < lst[i]:
+        rt = lst[i]
 
-bestCase = sum // N
+while lt<=rt:
+    ct = (lt + rt) // 2
 
-while True:
-    cnt = 0
-    bestCase -= 1
-    for val in lst:
-        cnt += val // bestCase
-    if cnt == N:
-        break
+    if Count(ct)>=N:
+        res = ct
+        lt = ct + 1
+    else:
+        rt = ct - 1
 
-print(bestCase)
+print(res)
