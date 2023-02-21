@@ -26,6 +26,7 @@ lst = list(map(int, input().split()))
 
 lt = 1
 rt = sum(lst)
+maxx = max(lst)
 res = 0
 
 while lt <= rt:
@@ -40,7 +41,7 @@ while lt <= rt:
         else:
             sec += val
 
-    if cnt <= M:
+    if ct>=maxx and cnt <= M:
         res = ct
         rt = ct - 1
     else:
