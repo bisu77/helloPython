@@ -24,32 +24,26 @@ sys.stdin=open("뮤직비디오(결정알고리즘).txt","rt")
 N, M = map(int,input().split())
 lst = list(map(int, input().split()))
 
-sum = 0
-for val in lst:
-    sum += val
-
-lt = sum//M
-rt = sum
+lt = 1
+rt = sum(lst)
 res = 0
 
 while lt <= rt:
-    cnt = 0
+    cnt = 1
     sec = 0
     ct = (lt+rt) // 2
 
     for val in lst:
-        sec += val
-        if ct == sec:
-            sec = 0
+        if sec+val > ct:
             cnt += 1
-        if ct < sec:
             sec = val
-            cnt += 1
+        else:
+            sec += val
 
-    if cnt >= M:
-        lt = ct + 1
+    if cnt <= M:
         res = ct
-    elif cnt < M:
         rt = ct - 1
+    else:
+        lt = ct + 1
 
 print(res)
