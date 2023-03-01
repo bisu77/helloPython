@@ -24,8 +24,24 @@ for _ in range(N):
 
 lst.sort()
 
-lt = 1
-rt = lst[N-1]
+lt = lst[0]
+rt = lst[N-1] - lt
 res = 0
+
 while lt <= rt:
-    ct = (lt+rt)//2
+    cnt = 0
+    ct = (lt+rt) // 2
+    st = lst[0]
+    for i in range(1,N):
+        dist = lst[i] - st
+        if dist >= ct:
+            cnt += 1
+            st = lst[i-1]
+
+    if C <= cnt:
+        res = ct
+        lt = ct + 1
+    else:
+        rt = ct - 1
+
+print(res)
