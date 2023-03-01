@@ -29,14 +29,15 @@ rt = lst[N-1] - lt
 res = 0
 
 while lt <= rt:
-    cnt = 0
+    cnt = 1
     ct = (lt+rt) // 2
     st = lst[0]
     for i in range(1,N):
         dist = lst[i] - st
         if dist >= ct:
             cnt += 1
-            st = lst[i-1]
+            print(lst[i], st, ct, cnt)
+            st = lst[i]
 
     if C <= cnt:
         res = ct
