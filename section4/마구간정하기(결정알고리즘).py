@@ -36,7 +36,6 @@ while lt <= rt:
         dist = lst[i] - st
         if dist >= ct:
             cnt += 1
-            print(lst[i], st, ct, cnt)
             st = lst[i]
 
     if C <= cnt:
