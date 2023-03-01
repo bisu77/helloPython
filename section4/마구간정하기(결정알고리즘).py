@@ -24,8 +24,8 @@ for _ in range(N):
 
 lst.sort()
 
-lt = lst[0]
-rt = lst[N-1] - lt
+lt = 1
+rt = lst[N-1]
 res = 0
 
 while lt <= rt:
