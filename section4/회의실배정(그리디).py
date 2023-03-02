@@ -16,34 +16,22 @@ import sys
 sys.stdin = open("회의실배정(그리디).txt","rt")
 
 N = int(input())
-
-sLst = list()
-eLst = list()
+meeting = []
 
 maxCnt = 1
 cnt = 1
 
 for _ in range(N):
     s, e = map(int,input().split())
-    sLst.append(s)
-    eLst.append(e)
+    meeting.append((s,e))
 
-for i in range(N):
-    for j in range(i+1, N):
-        if sLst[i] > sLst[j]:
-            sLst[i], sLst[j] = sLst[j], sLst[i]
-            eLst[i], eLst[j] = eLst[j], eLst[i]
+meeting.sort(key=lambda x : (x[1], x[0]))
+et = 0
+cnt = 0
 
-print(sLst, eLst)
+for s,e in meeting:
+    if s>=et:
+        et = e
+        cnt += 1
 
-for i in range(N):
-    s, e = sLst[i], eLst[i]
-    cnt = 1
-    for j in range(i+1,N):
-        if e <= sLst[j]:
-            e = eLst[j]
-            cnt += 1
-    if maxCnt < cnt:
-        maxCnt = cnt
-
-print(maxCnt)
+print(cnt)
