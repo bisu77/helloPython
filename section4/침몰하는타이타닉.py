@@ -14,34 +14,53 @@
 
 import sys
 
-sys.stdin = open("침몰하는타이타닉.txt","rt")
+sys.stdin = open("침몰하는타이타닉.txt", "rt")
 
 N, M = map(int, input().split())
 lst = list(map(int, input().split()))
-lst2 = [0]*N
+# lst2 = [0]*N
+#
+# lst.sort()
+# idx = 0
+# cnt = 0
+#
+# for i in range(N):
+#     maxWeight = 0
+#
+#     if lst2[i] == 0:
+#         for ii in range(i+1, N):
+#             if lst2[ii] == 0:
+#                 weight = lst[i] + lst[ii]
+#                 if weight == M:
+#                     lst2[i] += 1
+#                     lst2[ii] += 1
+#                     cnt += 1
+#                     break
+#                 if weight < M and maxWeight < weight:
+#                     maxWeight = weight
+#                     idx = ii
+#         else:
+#             lst2[i] += 1
+#             lst2[idx] += 1
+#             cnt += 1
+#
+# print(cnt)
+
+from collections import deque
 
 lst.sort()
-idx = 0
+lst = deque(lst)
 cnt = 0
-
-for i in range(N):
-    maxWeight = 0
-
-    if lst2[i] == 0:
-        for ii in range(i+1, N):
-            if lst2[ii] == 0:
-                weight = lst[i] + lst[ii]
-                if weight == M:
-                    lst2[i] += 1
-                    lst2[ii] += 1
-                    cnt += 1
-                    break
-                if weight < M and maxWeight < weight:
-                    maxWeight = weight
-                    idx = ii
-        else:
-            lst2[i] += 1
-            lst2[idx] += 1
-            cnt += 1
+while lst:
+    if len(lst) == 1:
+        cnt += 1
+        break
+    if lst[0] + lst[-1] > M:
+        lst.pop()
+        cnt += 1
+    else:
+        lst.popleft()
+        lst.pop()
+        cnt += 1
 
 print(cnt)
