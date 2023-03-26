@@ -35,19 +35,14 @@ while lst:
     fAbs = abs(lastNum - first)
     lAbs = abs(lastNum - last)
 
-    target = first
-    if fAbs > lAbs:
-        target = last
-
-    if lastNum < target:
-        if target == first:
-            str += 'L'
-            cnt += 1
-            lastNum = lst.popleft()
-        else:
-            str += 'R'
-            cnt += 1
-            lastNum = lst.pop()
+    if lastNum < first and lAbs > fAbs:
+        str += 'L'
+        cnt += 1
+        lastNum = lst.popleft()
+    elif lastNum < last:
+        str += 'R'
+        cnt += 1
+        lastNum = lst.pop()
     else:
         break
 
