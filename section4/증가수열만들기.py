@@ -23,25 +23,55 @@ sys.stdin = open("증가수열만들기.txt","rt")
 
 N = int(input())
 lst = list(map(int, input().split()))
-lst = deque(lst)
+# lst = deque(lst)
+#
+# str = ''
+# lastNum = 0
+#
+# while lst:
+#     first = lst[0]
+#     last = lst[len(lst)-1]
+#     fAbs = abs(lastNum - first)
+#     lAbs = abs(lastNum - last)
+#
+#     if lastNum < first and lAbs > fAbs:
+#         str += 'L'
+#         lastNum = lst.popleft()
+#     elif lastNum < last:
+#         str += 'R'
+#         lastNum = lst.pop()
+#     else:
+#         break
+#
+# print(len(str))
+# print(str)
 
-str = ''
+#강의방식
+
+lt = 0
+rt = len(lst)-1
 lastNum = 0
+tmp = list()
+str = ""
 
-while lst:
-    first = lst[0]
-    last = lst[len(lst)-1]
-    fAbs = abs(lastNum - first)
-    lAbs = abs(lastNum - last)
+while lt<=rt:
+    if lst[lt] > lastNum:
+        tmp.append((lst[lt],'L'))
+    if lst[rt] > lastNum:
+        tmp.append((lst[rt],'R'))
 
-    if lastNum < first and lAbs > fAbs:
-        str += 'L'
-        lastNum = lst.popleft()
-    elif lastNum < last:
-        str += 'R'
-        lastNum = lst.pop()
-    else:
+    if len(tmp) == 0:
         break
+
+    tmp.sort()
+    lastNum = tmp[0][0]
+    str += tmp[0][1]
+
+    if tmp[0][1] == 'L':
+        lt += 1
+    elif tmp[0][1] == 'R':
+        rt -= 1
+    tmp.clear()
 
 print(len(str))
 print(str)
