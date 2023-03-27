@@ -26,7 +26,6 @@ lst = list(map(int, input().split()))
 lst = deque(lst)
 
 str = ''
-cnt = 0
 lastNum = 0
 
 while lst:
@@ -37,14 +36,12 @@ while lst:
 
     if lastNum < first and lAbs > fAbs:
         str += 'L'
-        cnt += 1
         lastNum = lst.popleft()
     elif lastNum < last:
         str += 'R'
-        cnt += 1
         lastNum = lst.pop()
     else:
         break
 
-print(cnt)
+print(len(str))
 print(str)
