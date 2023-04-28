@@ -11,7 +11,7 @@
 
 import sys
 
-sys.stdin = open("가장큰수.txt","rt")
+sys.stdin = open("가장큰수.txt", "rt")
 
 #강의방식
 num, M = map(int, input().split())
